@@ -18,13 +18,13 @@
         {% for article in results %}
             <h3>{{ article.title }}</h3>
             <p>{{ article.content }}</p>
-            <p><strong>分析結果：</strong> {{ article.analysis }}</p>
             <h4>回覆：</h4>
             <ul>
                 {% for reply in article.replies %}
                     <li>{{ reply }}</li>
                 {% endfor %}
             </ul>
+            <p><strong>分析結果：</strong> {{ article.analysis }}</p>
         {% endfor %}
     {% endif %}
 </body>
