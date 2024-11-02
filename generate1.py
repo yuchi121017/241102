@@ -12,7 +12,7 @@ if api_key is None:
 
 genai.configure(api_key=api_key)
 
-def analyze_content(content, prompt="請分析以下內容，列出關於這項產品的優缺點，並以'Markdown'的形式返回"):
+def analyze_content(content, prompt="請分析以下內容，列出關於這項產品的優缺點"):
     model = genai.GenerativeModel("gemini-1.5-flash")
     
     # 使用指定的 prompt 和內容來生成回應
