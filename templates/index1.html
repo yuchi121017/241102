@@ -32,12 +32,12 @@
             <label for="prompt">分析提示：</label>
             <textarea id="prompt" name="prompt" class="form-control" placeholder="請輸入分析提示" rows="4" required></textarea>
         </div>
-        <button type="submit" class="btn btn-primary w-100">搜尋</button>
+        <button type="submit" class="btn btn-primary w-100">開始分析</button>
     </form>
 
     <!-- 搜尋結果 -->
     {% if results %}
-        <h2>搜尋結果：</h2>
+        <h2>分析結果：</h2>
         <div class="container">
             {% for article in results %}
                 <div class="card">
