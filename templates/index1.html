@@ -3,6 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <title>PTT Article Analysis</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        .markdown {
+            font-family: Arial, sans-serif;
+            /* line-height: 1.5; */
+        }
+    </style>
 </head>
 <body>
     <h1>PTT Article Analysis</h1>
@@ -24,8 +31,18 @@
                     <li>{{ reply }}</li>
                 {% endfor %}
             </ul>
-            <p><strong>分析結果：</strong> {{ article.analysis }}</p>
+            <p><strong>分析結果：</strong> <span class="markdown" id="analysis-{{ loop.index }}">{{ article.analysis }}</span></p>
         {% endfor %}
     {% endif %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const markdownElements = document.querySelectorAll('.markdown');
+            markdownElements.forEach(function(element) {
+                const markdownContent = element.innerHTML.trim();
+                console.log("Markdown Content:", markdownContent); // 確認 Markdown 內容
+                element.innerHTML = marked.parse(markdownContent); // 使用 marked.parse 轉換為 HTML
+            });
+        });
+    </script>
 </body>
 </html>

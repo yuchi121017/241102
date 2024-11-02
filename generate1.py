@@ -12,7 +12,7 @@ if api_key is None:
 
 genai.configure(api_key=api_key)
 
-def analyze_content(content, prompt="請分析以下內容，並列出關於這項產品的優缺點，列點表示"):
+def analyze_content(content, prompt="請分析以下內容，列出關於這項產品的優缺點，並以'Markdown'的形式返回"):
     model = genai.GenerativeModel("gemini-1.5-flash")
     
     # 使用指定的 prompt 和內容來生成回應
@@ -20,8 +20,12 @@ def analyze_content(content, prompt="請分析以下內容，並列出關於這�
     
     # 提取生成的文本
     generated_text = response.candidates[0].content.parts[0].text
-    formatted_text = re.sub(r'(\*\*[^\*]+\*\*)', r'\n\1', generated_text)
+    
+    # 確保生成的文本按段落分開，加入換行
+    formatted_text = generated_text.replace('**', '**\n')  # 確保 Markdown 格式的內容正常換行
+    print(formatted_text)
     return formatted_text
+
 
 
 # 加入prompt優化分析的結果，probably things like: 根據回覆者的情緒統整出市場上使用者對該項產品歸納的優劣點

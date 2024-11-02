@@ -32,8 +32,6 @@ def fetch_ptt_articles(board, keyword):
             # 去除 HTML 標籤，只保留純文本
             content_text = BeautifulSoup(content, 'html.parser').get_text()
 
-            # 使用 Gemini 分析去除 HTML 標籤的純文本內容
-            # analysis = analyze_content(content_text)
 
             # 提取回覆
             replies = []
