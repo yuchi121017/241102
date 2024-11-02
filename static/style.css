@@ -1,0 +1,83 @@
+/* 頁面整體背景與文字顏色 */
+body {
+    background-color: #121212;
+    color: #e0e0e0;
+    font-family: Arial, sans-serif;
+}
+
+/* 頁面標題樣式 */
+h1 {
+    color: #00adb5;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* 表單容器樣式 */
+form {
+    max-width: 600px;
+    margin: 0 auto 2rem;
+    padding: 1rem;
+    background-color: #222831;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* 表單標籤和輸入框樣式 */
+label, input, button {
+    color: #e0e0e0;
+}
+
+label {
+    font-weight: bold;
+}
+
+input[type="text"] {
+    background-color: #393e46;
+    border: none;
+    color: #eeeeee;
+}
+
+input[type="text"]:focus {
+    background-color: #464c5a;
+    color: #eeeeee;
+}
+
+/* 搜尋按鈕樣式 */
+button[type="submit"] {
+    background-color: #00adb5;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    margin-top: 1rem;
+}
+
+button[type="submit"]:hover {
+    background-color: #0099a1;
+}
+
+/* 搜尋結果標題 */
+h2 {
+    color: #00adb5;
+    text-align: center;
+    margin-top: 1rem;
+    font-weight: bold;
+}
+
+/* 每篇文章的卡片樣式 */
+.card {
+    background-color: #393e46;
+    border: none;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    color: #eeeeee;
+}
+
+.card-title {
+    color: #00adb5;
+}
+
+/* 分析結果樣式 */
+.markdown {
+    color: #e0e0e0;
+}

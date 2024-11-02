@@ -2,47 +2,65 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PTT Article Analysis</title>
+
+    <!-- 引入 Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+
+    <!-- 引入自訂 CSS -->
+    <link rel="stylesheet" href="static/style.css">
+
+    <!-- 引入 marked.js for Markdown 解析 -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <style>
-        .markdown {
-            font-family: Arial, sans-serif;
-            /* line-height: 1.5; */
-        }
-    </style>
 </head>
 <body>
+
     <h1>PTT Article Analysis</h1>
+
+    <!-- 搜尋表單 -->
     <form method="POST">
-        <label for="board">看板名稱：</label>
-        <input type="text" id="board" name="board" required>
-        <label for="keyword">關鍵字：</label>
-        <input type="text" id="keyword" name="keyword" required>
-        <button type="submit">搜尋</button>
+        <div class="mb-3">
+            <label for="board" class="form-label">看板名稱：</label>
+            <input type="text" id="board" name="board" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="keyword" class="form-label">關鍵字：</label>
+            <input type="text" id="keyword" name="keyword" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">搜尋</button>
     </form>
+
+    <!-- 搜尋結果 -->
     {% if results %}
         <h2>搜尋結果：</h2>
-        {% for article in results %}
-            <h3>{{ article.title }}</h3>
-            <p>{{ article.content }}</p>
-            <h4>回覆：</h4>
-            <ul>
-                {% for reply in article.replies %}
-                    <li>{{ reply }}</li>
-                {% endfor %}
-            </ul>
-            <p><strong>分析結果：</strong> <span class="markdown" id="analysis-{{ loop.index }}">{{ article.analysis }}</span></p>
-        {% endfor %}
+        <div class="container">
+            {% for article in results %}
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title">{{ article.title }}</h3>
+                        <p class="card-text">{{ article.content }}</p>
+                        <!-- 分析結果區域 -->
+                        <h4>分析結果：</h4>
+                        <p class="markdown" id="analysis-{{ loop.index }}">{{ article.analysis }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     {% endif %}
+
+    <!-- 使用 marked.js 解析 Markdown -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const markdownElements = document.querySelectorAll('.markdown');
             markdownElements.forEach(function(element) {
                 const markdownContent = element.innerHTML.trim();
-                console.log("Markdown Content:", markdownContent); // 確認 Markdown 內容
-                element.innerHTML = marked.parse(markdownContent); // 使用 marked.parse 轉換為 HTML
+                element.innerHTML = marked.parse(markdownContent);
             });
         });
     </script>
+
+    <!-- 引入 Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
