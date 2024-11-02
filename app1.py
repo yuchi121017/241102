@@ -33,7 +33,7 @@ async def fetch_article_content(link):
             reply_text = f"{user.text.strip()} {reply_content.text.strip()}"
             replies.append(reply_text)
     
-    return content_text, replies
+    return content_text, replies, full_link  # 返回文章內容、回覆和原始連結
 
 async def fetch_ptt_articles(board, keyword):
     url = f'https://www.ptt.cc/bbs/{board}/search'
@@ -51,12 +51,18 @@ async def fetch_ptt_articles(board, keyword):
             article_links.append((title, link))
 
     for title, link in article_links:
-        content_text, replies = await fetch_article_content(link)
+        content_text, replies, full_link = await fetch_article_content(link)  # 獲取原始連結
         
         # 批量處理並限制 API 調用頻率
         try:
             analysis = analyze_content(replies)  # 批量分析回覆
-            results.append({'title': title, 'content': content_text, 'analysis': analysis, 'replies': replies})
+            results.append({
+                'title': title,
+                'content': content_text,
+                'analysis': analysis,
+                'replies': replies,
+                'url': full_link  # 加入原始文章連結
+            })
             time.sleep(1)  # 避免 API 請求過於頻繁
         except Exception as e:
             print(f"API 調用失敗：{e}")
