@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PTT Article Analysis</title>
+</head>
+<body>
+    <h1>PTT Article Analysis</h1>
+    <form method="POST">
+        <label for="board">看板名稱：</label>
+        <input type="text" id="board" name="board" required>
+        <label for="keyword">關鍵字：</label>
+        <input type="text" id="keyword" name="keyword" required>
+        <button type="submit">搜尋</button>
+    </form>
+    {% if results %}
+        <h2>搜尋結果：</h2>
+        {% for article in results %}
+            <h3>{{ article.title }}</h3>
+            <p>{{ article.content }}</p>
+            <p><strong>分析結果：</strong> {{ article.analysis }}</p>
+            <h4>回覆：</h4>
+            <ul>
+                {% for reply in article.replies %}
+                    <li>{{ reply }}</li>
+                {% endfor %}
+            </ul>
+        {% endfor %}
+    {% endif %}
+</body>
+</html>
