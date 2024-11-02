@@ -20,7 +20,7 @@ def fetch_ptt_articles(board, keyword):
             article_response = requests.get(full_link)
             article_soup = BeautifulSoup(article_response.text, 'html.parser')
 
-            # 提取文章內容，僅保留 richcontent 前的部分
+            # 提取文章內容，僅保留 richcontent 前的部分，並去除 HTML 標籤
             content_elem = article_soup.find('div', id='main-content')
             content = ""
             if content_elem:
@@ -28,9 +28,12 @@ def fetch_ptt_articles(board, keyword):
                     if elem.name == "div" and "richcontent" in elem.get("class", []):
                         break
                     content += str(elem)
+            
+            # 去除 HTML 標籤，只保留純文本
+            content_text = BeautifulSoup(content, 'html.parser').get_text()
 
-            # 使用 Gemini 分析文章內容
-            analysis = analyze_content(content)
+            # 使用 Gemini 分析去除 HTML 標籤的純文本內容
+            # analysis = analyze_content(content_text)
 
             # 提取回覆
             replies = []
@@ -40,9 +43,10 @@ def fetch_ptt_articles(board, keyword):
                 if user and reply_content:
                     reply_text = f"{user.text.strip()} {reply_content.text.strip()}"
                     replies.append(reply_text)  # 保留回覆者名稱和回覆內容
-
-            results.append({'title': title, 'content': content, 'analysis': analysis, 'replies': replies})
-
+            
+            analysis = analyze_content(replies)
+            # results.append({'title': title, 'content': content_text, 'analysis': analysis, 'replies': replies})
+            results.append({'title': title, 'content': content_text, 'analysis': analysis, 'replies': replies})
     return results
 
 @app.route('/', methods=['GET', 'POST'])
