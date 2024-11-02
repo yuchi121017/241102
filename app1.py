@@ -35,7 +35,7 @@ async def fetch_article_content(link):
     
     return content_text, replies, full_link  # 返回文章內容、回覆和原始連結
 
-async def fetch_ptt_articles(board, keyword):
+async def fetch_ptt_articles(board, keyword, prompt):
     url = f'https://www.ptt.cc/bbs/{board}/search'
     response = requests.get(url, params={'q': keyword})
     soup = BeautifulSoup(response.text, 'html.parser')
@@ -55,7 +55,7 @@ async def fetch_ptt_articles(board, keyword):
         
         # 批量處理並限制 API 調用頻率
         try:
-            analysis = analyze_content(replies)  # 批量分析回覆
+            analysis = analyze_content(replies, prompt=prompt)  # 批量分析回覆
             results.append({
                 'title': title,
                 'content': content_text,
@@ -76,7 +76,8 @@ async def index():
     if request.method == 'POST':
         board = request.form['board']
         keyword = request.form['keyword']
-        results = await fetch_ptt_articles(board, keyword)
+        prompt = request.form['prompt']
+        results = await fetch_ptt_articles(board, keyword, prompt=prompt)
     return render_template('index1.html', results=results)
 
 if __name__ == '__main__':

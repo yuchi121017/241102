@@ -1,83 +1,83 @@
 /* 頁面整體背景與文字顏色 */
 body {
-    background-color: #121212;
-    color: #e0e0e0;
-    font-family: Arial, sans-serif;
+    background-color: #121212; /* 背景為深色 */
+    color: #e0e0e0; /* 文字顏色 */
+    font-family: Arial, sans-serif; /* 字型 */
 }
 
 /* 頁面標題樣式 */
 h1 {
-    color: #00adb5;
-    font-weight: bold;
-    text-align: center;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    color: #CEB071; /* 金色標題 */
+    font-weight: bold; /* 粗體 */
+    margin-top: 2rem; /* 上邊距 */
+    margin-bottom: 2rem; /* 下邊距 */
 }
 
 /* 表單容器樣式 */
 form {
-    max-width: 600px;
-    margin: 0 auto 2rem;
-    padding: 1rem;
-    background-color: #222831;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    max-width: 600px; /* 最大寬度 */
+    margin: 0 auto 2rem; /* 自動邊距 */
+    padding: 1rem; /* 內邊距 */
+    background-color: #222831; /* 表單背景 */
+    border-radius: 8px; /* 圓角 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* 陰影效果 */
 }
 
 /* 表單標籤和輸入框樣式 */
 label, input, button {
-    color: #e0e0e0;
+    color: #e0e0e0; /* 文字顏色 */
 }
 
 label {
-    font-weight: bold;
+    font-weight: bold; /* 粗體 */
 }
 
-input[type="text"] {
-    background-color: #393e46;
-    border: none;
-    color: #eeeeee;
+input[type="text"], textarea {
+    background-color: #393e46; /* 輸入框背景 */
+    border: none; /* 無邊框 */
+    color: #eeeeee; /* 文字顏色 */
 }
 
-input[type="text"]:focus {
-    background-color: #464c5a;
-    color: #eeeeee;
+input[type="text"]:focus, textarea:focus {
+    background-color: #464c5a; /* 聚焦時背景色 */
+    color: #eeeeee; /* 聚焦時文字顏色 */
 }
 
 /* 搜尋按鈕樣式 */
 button[type="submit"] {
-    background-color: #00adb5;
-    border: none;
-    padding: 0.5rem 1.5rem;
-    margin-top: 1rem;
+    background-color: #CEB071; /* 金色背景 */
+    border: none; /* 無邊框 */
+    padding: 0.5rem 1.5rem; /* 內邊距 */
+    margin-top: 1rem; /* 上邊距 */
+    color: #121212; /* 按鈕文字顏色 */
 }
 
 button[type="submit"]:hover {
-    background-color: #0099a1;
+    background-color: #b49e6a; /* 滑鼠懸停時的顏色 */
 }
 
 /* 搜尋結果標題 */
 h2 {
-    color: #00adb5;
-    text-align: center;
-    margin-top: 1rem;
-    font-weight: bold;
+    color: #CEB071; /* 金色 */
+    text-align: center; /* 中央對齊 */
+    margin-top: 1rem; /* 上邊距 */
+    font-weight: bold; /* 粗體 */
 }
 
 /* 每篇文章的卡片樣式 */
 .card {
-    background-color: #393e46;
-    border: none;
-    border-radius: 8px;
-    margin-bottom: 1.5rem;
-    color: #eeeeee;
+    background-color: #393e46; /* 卡片背景 */
+    border: none; /* 無邊框 */
+    border-radius: 8px; /* 圓角 */
+    margin-bottom: 1.5rem; /* 下邊距 */
+    color: #eeeeee; /* 文字顏色 */
 }
 
 .card-title {
-    color: #00adb5;
+    color: #CEB071; /* 金色標題 */
 }
 
 /* 分析結果樣式 */
 .markdown {
-    color: #e0e0e0;
+    color: #e0e0e0; /* 文字顏色 */
 }
