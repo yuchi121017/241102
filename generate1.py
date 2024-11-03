@@ -28,5 +28,4 @@ def analyze_content(content, prompt):
 
 
 
-# 加入prompt優化分析的結果，probably things like: 根據回覆者的情緒統整出市場上使用者對該項產品歸納的優劣點
-# 加入分析回覆的內容
+
