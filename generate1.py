@@ -23,7 +23,7 @@ def analyze_content(content, prompt):
     
     # 確保生成的文本按段落分開，加入換行
     formatted_text = generated_text.replace('**', '**\n')  # 確保 Markdown 格式的內容正常換行
-    print(formatted_text)
+    # print(formatted_text)
     return formatted_text
 
 

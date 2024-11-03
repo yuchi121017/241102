@@ -8,7 +8,7 @@ from generate1 import analyze_content  # 從 generate1.py 導入分析函數
 app = Flask(__name__)
 
 async def fetch_article_content(link):
-    """獲取文章內容並過濾 richcontent 前的部分，返回純文本和回覆"""
+    """獲取單篇文章內容和回覆"""
     full_link = f'https://www.ptt.cc{link}'
     article_response = requests.get(full_link)
     article_soup = BeautifulSoup(article_response.text, 'html.parser')
@@ -76,20 +76,23 @@ async def fetch_ptt_articles(board, keyword, prompt):
             print(f"API 調用失敗：{e}")
             continue  # 如果發生錯誤，跳過該文章
 
-    # 將 content_all 打印到終端
-    # print("所有內文與回覆內容:\n", content_all)
+    # 對 content_all 執行分析
+    overall_analysis = analyze_content(content_all, prompt=prompt)
 
-    return results
+    # 返回 results 和 content_all 分析結果
+    return results, overall_analysis
 
 @app.route('/', methods=['GET', 'POST'])
 async def index():
     results = []
+    overall_analysis = ""
     if request.method == 'POST':
         board = request.form['board']
         keyword = request.form['keyword']
         prompt = request.form['prompt']
-        results = await fetch_ptt_articles(board, keyword, prompt=prompt)
-    return render_template('index1.html', results=results)
+        results, overall_analysis = await fetch_ptt_articles(board, keyword, prompt=prompt)
+    return render_template('index1.html', results=results, overall_analysis=overall_analysis)
+
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(port=5050)
