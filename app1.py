@@ -41,6 +41,9 @@ async def fetch_ptt_articles(board, keyword, prompt):
     soup = BeautifulSoup(response.text, 'html.parser')
     results = []
 
+    # 初始化 content_all 變數，用於存儲所有內文與回覆
+    content_all = ""
+
     # 限制文章數以減少 API 調用
     article_links = []
     for entry in soup.find_all('div', class_='r-ent')[:5]:  # 僅處理前 5 篇文章
@@ -52,6 +55,11 @@ async def fetch_ptt_articles(board, keyword, prompt):
 
     for title, link in article_links:
         content_text, replies, full_link = await fetch_article_content(link)  # 獲取原始連結
+
+        # 將內文和回覆串接到 content_all 中
+        content_all += f"標題: {title}\n"
+        content_all += f"內容: {content_text}\n"
+        content_all += "回覆:\n" + "\n".join(replies) + "\n\n"
         
         # 批量處理並限制 API 調用頻率
         try:
@@ -67,6 +75,9 @@ async def fetch_ptt_articles(board, keyword, prompt):
         except Exception as e:
             print(f"API 調用失敗：{e}")
             continue  # 如果發生錯誤，跳過該文章
+
+    # 將 content_all 打印到終端
+    # print("所有內文與回覆內容:\n", content_all)
 
     return results
 
